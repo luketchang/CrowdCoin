@@ -1,0 +1,57 @@
+Setting Up Contracts:
+  - compile.js script reads through campaign.sol contracts and writes compiled source code into
+    two documents in the build folder (so if we ever change contract we can easily recompile)
+  - deploy.js deploys our a factory contract to test network and gives us address to use for later
+
+Front-End Process:
+  - set up dependencies
+  - create pages folder and add dummy template js docs
+  - create web3.js doc to export window's instance of web3 or hdwalletprovider's instance
+  - create factory.js document to export factory instance object that allows you to interact with
+    deployed contract in Javascript
+
+  - use exported factory object in index.js to get list of deployed campaigns
+  - reconfigure web3.js file to account for case with server-side rendering (using hdwalletprovider)
+  - switch componentDidMount to getInitialProps due to Next.js server side rendering
+
+  - import Semantic UI packages
+  - map through props deployed campaigns object to render card objects
+  - create layout component to render repeated objects such as header and footer (puts page's 
+    actual contents in props.children)
+  - create custom header component to use in overall layout.js component
+  - wrap all layout content in semantic ui container object to fix page formatting
+
+  - create new campaign folder in pages folder and create new.js for new campaigns page
+  - move semantic ui style link to layouts page and use next/head module to put it in html head tag
+    so it shows up on all pages
+
+  - create form for creating new campaign and use semantic ui components for form and error messages
+  - install next-routes dependency for dynamic nested routes and create routes.js and server.js files
+    - routes.js serves as custom router file
+    - server.js creates our own custom server to handle custom routing
+    - both routes and server file code come from next-routes github documentation
+    - *note that rerouting after transaction success doesn't work likely due to deprecated web3 or solidity version*
+  
+  - link header boxes to routes in our website with next-routes Link
+  - link "view campaign" tags to dynamically route to /campaign/"the address" using routes.js doc
+
+  - modify, recompile, and redeploy campaign contract to have one function that returns all summary 
+    details about campaign + request count
+  - create campaign.js script to export contract interface at specified address for campaign/show page
+    and get summary from getInitialProps in show.js
+
+  - use semantic ui grid to store summary info
+  - create form on right side by making new component that follows structure of original creation form
+  - add button and routes to view specific requests in campaign
+  - before adding summary of requests, create button to create new request page and build form for new requests
+
+Notes:
+  - web3.eth.Contract gives you an object that allows you to interact with deployed contract
+    using Javascript
+  - server side rendering: Javascript rendered in next server before being sent to browser as opposed
+      to browser rendering sent Javascript
+      - since documents rendered outside browser, you can't access global window variable when getting 
+        web3 instance
+  - getInitialProps is static class method because it doesn't require you to render anything by making instances
+    which speeds up server side render process
+  - factory and campaign ethereum documents return specific contract instance for contract @ certain address
