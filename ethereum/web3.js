@@ -1,4 +1,5 @@
 import Web3 from 'web3';
+import { INFURA_LINK } from '../config';
 
 let web3;
 
@@ -8,7 +9,7 @@ if(typeof window !== 'undefined' && window.web3 !== 'undefined') {
 } else {
   // in server with no metamask
   const provider = new Web3.providers.HttpProvider(
-    'https://rinkeby.infura.io/v3/118066d6af2e4e049b28a4fc4cc69eb5'
+    INFURA_LINK
   );
   web3 = new Web3(provider);
 }

@@ -10,8 +10,10 @@ class ShowCampaign extends Component {
     static async getInitialProps(props) {
         const campaign = Campaign(props.query.address);
         const summary = await campaign.methods.getSummary().call();
+        const description = await campaign.methods.campaignDescription().call();
         
         return {
+            campaignDescription: description,
             campaignAddress: props.query.address,
             minimumContribution: summary[0],
             balance: summary[1],
@@ -69,7 +71,7 @@ class ShowCampaign extends Component {
     render() {
         return (
             <Layout>
-                <h3>Show Campaign</h3>
+                <h2>{this.props.campaignDescription}</h2>
                 <Grid>
                     <Grid.Row>
                         <Grid.Column width={10}>
