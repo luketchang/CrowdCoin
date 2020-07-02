@@ -9,7 +9,7 @@
 - Stack: Solidity, Javascript (React)
 
 ### Home (list of campaigns)
-<img src="https://raw.githubusercontent.com/ltchang2019/CrowdCoin/master/assets/home.png" width="8000" height="400" />
+<img src="https://raw.githubusercontent.com/ltchang2019/CrowdCoin/master/assets/home.png" width="8000" height="350" />
 <br>
 
 ### New Campaign (form to create new campaign)
